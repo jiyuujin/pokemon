@@ -1,24 +1,28 @@
 import React from 'react'
-import logo from './logo.svg'
+import useSWR from 'swr'
 import './App.css'
+import './assets/gallery.css'
+
+import { Card } from './components/Card'
 
 function App() {
+    const { data, error } = useSWR(
+        `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`
+    )
+
+    if (!data) return <div>Loading..</div>
+
+    if (error) return <div>Failed</div>
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <div className="gallery">
+                {data.results.map((pokemon: { name: string; url: string }) => (
+                    <div key={pokemon.name} className="gallery__item">
+                        <Card pokemon={pokemon} />
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
