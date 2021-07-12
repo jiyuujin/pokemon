@@ -3,8 +3,8 @@ import useSWR from 'swr'
 import './App.css'
 import './assets/gallery.css'
 
-import { Card } from './components/Card'
 import { Search } from './components/Search'
+import { CardList } from './components/CardList'
 
 function App() {
     const { data, error } = useSWR(
@@ -26,11 +26,7 @@ function App() {
                 <Search text={searchText} setText={handleInputClick} />
             </div>
             <div className="gallery">
-                {data.results.map((pokemon: { name: string; url: string }) => (
-                    <div key={pokemon.name} className="gallery__item">
-                        <Card pokemon={pokemon} />
-                    </div>
-                ))}
+                <CardList data={data.results} search={searchText} />
             </div>
         </div>
     )
