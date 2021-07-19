@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render component 1`] = `
+<div
+  className="search__item"
+>
+  <label>
+    unown
+  </label>
+  <input
+    className="sc-gtsrHT akHhg"
+    onChange={[Function]}
+    placeholder="検索してください"
+    type="text"
+    value="unown"
+  />
+</div>
+`;
