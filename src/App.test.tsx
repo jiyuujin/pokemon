@@ -1,15 +1,24 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { SWRConfig } from 'swr'
 import { render } from '@testing-library/react'
 
 import App from './App'
 
-test('Render component', () => {
-    const component = renderer.create(<App />)
-    expect(component).toMatchSnapshot()
+it('Check response', async () => {
+    render(
+        <SWRConfig value={{ dedupingInterval: 0 }}>
+            <App />
+        </SWRConfig>
+    )
 })
 
-test('Confirm text', () => {
-    const component = render(<App />)
-    expect(component.getAllByText('Learn React')).toHaveLength(1)
+it('Check custom response', async () => {
+    const wrapper = ({ children }: { children: React.ReactNode }) => {
+        return <SWRConfig value={{ dedupingInterval: 0 }}>{children}</SWRConfig>
+    }
+
+    const customRender = (ui: React.ReactElement, options?: any) =>
+        render(ui, { wrapper, ...options })
+
+    console.log(customRender)
 })
