@@ -1,37 +1,28 @@
 import React from 'react'
-import useSWR from 'swr'
-import './App.css'
-import './assets/gallery.css'
+import { ReactLocation, Router, Outlet } from 'react-location'
+import Index from './pages/Index'
+import About from './pages/About'
 
-import { Search } from './components/Search'
-import { CardList } from './components/CardList'
+const routes = [
+    {
+        path: '/',
+        element: <Index />,
+    },
+    {
+        path: '/about',
+        element: <About />,
+    },
+]
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const location = new ReactLocation()
 
 function App() {
-    const { data, error } = useSWR(
-        `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
-        fetcher
-    )
-    const [searchText, setSearchText] = React.useState<string>('')
-
-    if (!data) return <div>Loading..</div>
-
-    if (error) return <div>Failed</div>
-
-    const handleInputClick = (newtext: string) => {
-        setSearchText(newtext)
-    }
-
     return (
-        <div className="App">
-            <div className="search">
-                <Search text={searchText} setText={handleInputClick} />
+        <Router location={location} routes={routes}>
+            <div>
+                <Outlet />
             </div>
-            <div className="gallery">
-                <CardList data={data.results} search={searchText} />
-            </div>
-        </div>
+        </Router>
     )
 }
 
