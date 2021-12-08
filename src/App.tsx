@@ -1,18 +1,17 @@
 import React from 'react'
-import useSWR from 'swr'
+import { useQuery } from 'react-query'
 import './App.css'
 import './assets/gallery.css'
 
 import { Search } from './components/Search'
 import { CardList } from './components/CardList'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
 function App() {
-    const { data, error } = useSWR(
-        `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
-        fetcher
-    )
+    const { data, error } = useQuery('items', async () => {
+        return await fetch(
+            `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`
+        ).then((res) => res.json())
+    })
     const [searchText, setSearchText] = React.useState<string>('')
 
     if (!data) return <div>Loading..</div>
