@@ -14,8 +14,6 @@ function App() {
     })
     const [searchText, setSearchText] = React.useState<string>('')
 
-    if (!data) return <div>Loading..</div>
-
     if (error) return <div>Failed</div>
 
     const handleInputClick = (newtext: string) => {
@@ -28,7 +26,9 @@ function App() {
                 <Search text={searchText} setText={handleInputClick} />
             </div>
             <div className="gallery">
-                <CardList data={data.results} search={searchText} />
+                <React.Suspense fallback={<>Loading..</>}>
+                    <CardList data={data?.results} search={searchText} />
+                </React.Suspense>
             </div>
         </div>
     )
