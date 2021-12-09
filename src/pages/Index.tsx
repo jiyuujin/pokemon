@@ -1,23 +1,20 @@
 import React from 'react'
-import useSWR from 'swr'
+import { useMatch } from 'react-location'
 import '../App.css'
 import '../assets/gallery.css'
 
 import { Search } from '../components/Search'
 import { CardList } from '../components/CardList'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
 function Index() {
-    const { data, error } = useSWR(
-        `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
-        fetcher
-    )
+    const {
+        data: { data },
+    } = useMatch()
     const [searchText, setSearchText] = React.useState<string>('')
 
     if (!data) return <div>Loading..</div>
 
-    if (error) return <div>Failed</div>
+    // if (error) return <div>Failed</div>
 
     const handleInputClick = (newtext: string) => {
         setSearchText(newtext)
@@ -29,6 +26,7 @@ function Index() {
                 <Search text={searchText} setText={handleInputClick} />
             </div>
             <div className="gallery">
+                {/*@ts-ignore*/}
                 <CardList data={data.results} search={searchText} />
             </div>
         </div>
