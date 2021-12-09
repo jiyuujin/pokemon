@@ -6,6 +6,18 @@ import About from './pages/About'
 const routes = [
     {
         path: '/',
+        loader: async (_match: any, { dispatch }: any) => {
+            const teamsRes = await fetch(
+                `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`
+            )
+            dispatch({
+                type: 'maxAge',
+                maxAge: Number(teamsRes.headers.get('max-age')),
+            })
+            return {
+                data: await teamsRes.json(),
+            }
+        },
         element: <Index />,
     },
     {
