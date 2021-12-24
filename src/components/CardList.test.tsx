@@ -1,9 +1,10 @@
 import React from 'react'
+import { it, expect } from 'vitest'
 import renderer from 'react-test-renderer'
 
 import { CardList } from './CardList'
 
-test('Render component', () => {
+it('Render component', () => {
     const component = renderer.create(
         <CardList
             data={[
