@@ -1,10 +1,11 @@
 import React from 'react'
+import { it, expect } from 'vitest'
 import renderer from 'react-test-renderer'
 import { render } from '@testing-library/react'
 
 import { Card } from './Card'
 
-test('Render component', () => {
+it('Render component', () => {
     const component = renderer.create(
         <Card
             pokemon={{
@@ -16,7 +17,7 @@ test('Render component', () => {
     expect(component).toMatchSnapshot()
 })
 
-test('Confirm text', () => {
+it('Confirm text', () => {
     const component = render(
         <Card
             pokemon={{

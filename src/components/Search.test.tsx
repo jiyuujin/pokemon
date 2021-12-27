@@ -1,4 +1,5 @@
 import React from 'react'
+import { it, expect } from 'vitest'
 import renderer from 'react-test-renderer'
 import { render, fireEvent } from '@testing-library/react'
 
@@ -12,19 +13,19 @@ const setup = () => {
     return { input, ...utils }
 }
 
-test('Render component', () => {
+it('Render component', () => {
     const component = renderer.create(
         <Search text={'unown'} setText={() => {}} />
     )
     expect(component).toMatchSnapshot()
 })
 
-test('Confirm text', () => {
+it('Confirm text', () => {
     const component = render(<Search text={'unown'} setText={() => {}} />)
     expect(component.getAllByText('unown')).toHaveLength(1)
 })
 
-test('Confirm text', () => {
+it('Confirm text', () => {
     const { input } = setup()
     fireEvent.change(input, { target: { value: 'unown' } })
     expect(input.value).toBe('unown')

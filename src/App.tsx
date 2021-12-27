@@ -11,6 +11,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 function App() {
     const { data, error } = useSWR(
         `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
+        // `${import.meta.env.VITE_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
         fetcher
     )
     const [searchText, setSearchText] = React.useState<string>('')

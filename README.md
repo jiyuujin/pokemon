@@ -1,9 +1,9 @@
-# Pokemon on React (CRA)
+# Pokemon on React (Vite)
 
 Please check [Pokemon App](https://hack-react.netlify.app/handson/pokemon.html) for details on environment construction and web application
 
 ## Tech stack
 
-- CRA (create-react-app)
+- Vite
 - TypeScript
 - Pokemon API
