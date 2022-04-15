@@ -9,30 +9,30 @@ import { CardList } from './components/CardList'
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 function App() {
-    const { data, error } = useSWR(
-        `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
-        fetcher
-    )
-    const [searchText, setSearchText] = React.useState<string>('')
+  const { data, error } = useSWR(
+    `${process.env.REACT_APP_POKEMON_API}/pokemon?limit=200&offset=200`,
+    fetcher
+  )
+  const [searchText, setSearchText] = React.useState<string>('')
 
-    if (!data) return <div>Loading..</div>
+  if (!data) return <div>Loading..</div>
 
-    if (error) return <div>Failed</div>
+  if (error) return <div>Failed</div>
 
-    const handleInputClick = (newtext: string) => {
-        setSearchText(newtext)
-    }
+  const handleInputClick = (newtext: string) => {
+    setSearchText(newtext)
+  }
 
-    return (
-        <div className="App">
-            <div className="search">
-                <Search text={searchText} setText={handleInputClick} />
-            </div>
-            <div className="gallery">
-                <CardList data={data.results} search={searchText} />
-            </div>
-        </div>
-    )
+  return (
+    <div className="App">
+      <div className="search">
+        <Search text={searchText} setText={handleInputClick} />
+      </div>
+      <div className="gallery">
+        <CardList data={data.results} search={searchText} />
+      </div>
+    </div>
+  )
 }
 
 export default App

@@ -11,13 +11,6 @@ module.exports = {
     rules: {
         'react/display-name': 'off',
         'react/prop-types': 'off',
-        'prettier/prettier': [
-            'error',
-            {
-                'singleQuote': true,
-                'semi': false,
-                'tabWidth': 4
-            }
-        ]
+        'jsx-a11y/img-redundant-alt': 'off',
     }
 }
