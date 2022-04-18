@@ -8,7 +8,7 @@ exports[`Render component 1`] = `
     unown
   </label>
   <input
-    className="sc-gtsrHT akHhg"
+    className="sc-gsnTZi jZDPDG"
     onChange={[Function]}
     placeholder="検索してください"
     type="text"
